@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Article Spinner Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    .navbar {
+      background-color: blue;
+      padding: 10px;
+      color: #fff;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .footer {
+      background-color: blue;
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .input-container {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .input-container textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn-container {
+      text-align: center;
+    }
+
+    .btn-container button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .result-container {
+      display: none;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    .result-container h2 {
+      margin-top: 0;
+    }
+
+    .result-container p {
+      margin: 0 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#">Website Name</a>
+    <a href="#">Contact Us</a>
+    <a href="#">About Us</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+
+  <h1>Article Spinner Tool</h1>
+  
+  <br><center>ADD CODE</center></br>
+  
+  <br><p style="text-align: center;">&nbsp;<b>Article spinning involve<a href="https://sbtech.sayantv.in/" target="_blank">s</a> the process of taking an original article and rephrasing it<a href="https://sbtech.sayantv.in/" target="_blank">s</a> content to produce multiple version<a href="https://sbtech.sayantv.in/" target="_blank">s</a><a href="https://sbtech.sayantv.in/" target="_blank">.</a> These variations maintain the core message and essence while using different words<a href="https://sbtech.sayantv.in/" target="_blank">,</a> phrases, and sentenc<a href="https://sbtech.sayantv.in/" target="_blank">e</a> structures<a href="https://sbtech.sayantv.in/" target="_blank">.</a> Article spinning can be automated with the help of a specialized tool<a href="https://sbtech.sayantv.in/" target="_blank">,</a> streamlining the proces<a href="https://sbtech.sayantv.in/" target="_blank">s</a> and saving time<a href="https://sbtech.sayantv.in/" target="_blank">.</a></b></p></br>
+
+<br><center>ADD CODE</center></br>
+
+  <div class="input-container">
+    <textarea id="input-text" placeholder="Enter your text here..."></textarea>
+  </div>
+
+  <div class="btn-container">
+    <button id="spin-btn">Spin Article</button>
+  </div>
+
+  <div class="result-container" id="result-container">
+    <h2>Spun Article</h2>
+    <p id="spun-text"></p>
+  </div>
+
+<br><center>ADD CODE</center></br>
+
+<br><center>ARTICLE</center></br>
+
+<br><center>ADD CODE</center></br>
+
+  <div class="footer">
+    &copy; 2023 Your Website. All rights reserved.
+  </div>
+
+  <script>
+    async function spinArticle() {
+      const inputText = document.getElementById('input-text').value;
+      const spunText = await spinWords(inputText);
+      document.getElementById('spun-text').textContent = spunText;
+      document.getElementById('result-container').style.display = 'block';
+    }
+
+    async function spinWords(text) {
+      const words = text.split(' ');
+      const spunWords = await Promise.all(words.map(async word => {
+        if (isEnglishWord(word)) {
+          const synonyms = await getSynonyms(word);
+          if (synonyms.length > 0) {
+            const randomIndex = Math.floor(Math.random() * synonyms.length);
+            return synonyms[randomIndex].word;
+          }
+        }
+        return word;
+      }));
+      return spunWords.join(' ');
+    }
+
+    function isEnglishWord(word) {
+      const englishRegex = /^[A-Za-z]+$/;
+      return englishRegex.test(word);
+    }
+
+    async function getSynonyms(word) {
+      const response = await fetch(`https://api.datamuse.com/words?rel_syn=${word}`);
+      const data = await response.json();
+      return data;
+    }
+
+    document.getElementById('spin-btn').addEventListener('click', spinArticle);
+  </script>
+</body>
+</html>
